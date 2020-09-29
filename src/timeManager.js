@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Countdown from 'react-countdown';
+import DaFile from './schedules.json';
 
 
 var schedule = [
@@ -9,7 +10,14 @@ var schedule = [
     ['Period 3', new Date("September 24, 2020 11:51:00"), new Date("September 24, 2020 11:56:00")],
     ['Period 4', new Date("September 24, 2020 11:57:00"), new Date("September 24, 2020 11:59:00")]
 
-];
+var myObject = JSON.parse(JSON.stringify({DaFile}));
+console.log(myObject);
+//
+// var yes = [
+//   "period 1"{
+//     time: "yes";
+//   }
+// ];
 
 // [new Date("September 22, 2020 11:13:00"), new Date("September 22, 2020 11:15:00"), new Date("September 23, 2020 00:11:00"), new Date("September 24, 2020 00:11:00")];
 
@@ -53,7 +61,7 @@ class TimeManager extends React.Component {
 
     getSchedule(){
       var now = new Date().getTime();
-  
+
       for (var i = 0; i < schedule.length; i++) {
 
           if (now >= schedule[i][1].getTime() && now <= schedule[i][2].getTime()) {

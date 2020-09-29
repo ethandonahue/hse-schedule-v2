@@ -1,0 +1,4 @@
+lunchName	lunchStart	lunchEnd	classStart	classEnd	multipleClass	secondClassStart	secondClassEnd
+A	11:07	11:37	11:44	13:09	FALSE		
+B	11:53	12:23	11:14	11:53	TRUE	12:30	13:09
+C	12:29	13:09	11:14	12:39	FALSE		
