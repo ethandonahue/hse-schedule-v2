@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Countdown from 'react-countdown';
+import DaFile from './schedules.json';
 
 
 var schedule = [new Date("September 22, 2020 11:13:00"), new Date("September 22, 2020 11:15:00"), new Date("September 23, 2020 00:11:00"), new Date("September 24, 2020 00:11:00")];
 
+var myObject = JSON.parse(JSON.stringify({DaFile}));
+console.log(myObject);
+//
+// var yes = [
+//   "period 1"{
+//     time: "yes";
+//   }
+// ];
 
 
 
