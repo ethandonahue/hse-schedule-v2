@@ -1,9 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Countdown from "react-countdown";
 import Schedule from "./schedules.json";
 import moment from "moment";
 import timezone from "moment-timezone";
+
+// moment.tz.setDefault("America/New_York");
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
 
@@ -65,10 +65,10 @@ class TimeManager extends React.Component {
 
   render() {
     // console.log(this.getSchedule());
-    return [
-      <div> {this.timeLeft()} </div>,
+    return (
+      <div> {this.timeLeft()} </div>
       // <Countdown date = {this.getPeriod()} />
-    ];
+    );
   }
 }
 
