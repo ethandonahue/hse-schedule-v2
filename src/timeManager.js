@@ -46,9 +46,13 @@ class TimeManager extends React.Component {
         return end;
       }
     }
+    return true;
   }
 
   timeLeft() {
+    if(this.getPeriod()){
+      return "End";
+    }
     var time = this.getPeriod();
     var distance = time.valueOf() - moment().valueOf();
     var hours = Math.floor(
