@@ -7,10 +7,14 @@ import timezone from "moment-timezone";
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
 
+console.log(scheduleFile);
+
 class TimeManager extends React.Component {
   constructor() {
     super();
     window.tm = this;
+    this.getPeriodTime = this.getPeriodTime.bind(this);
+    this.getPeriodType = this.getPeriodType.bind(this);
     this.getPeriod = this.getPeriod.bind(this);
     this.timeLeft = this.timeLeft.bind(this);
   }
@@ -22,7 +26,37 @@ class TimeManager extends React.Component {
     this.setState({});
   }
 
-  getPeriod() {
+  getPeriodTime() {
+    var currentPeriod = this.getPeriod();
+    if(currentPeriod !== true){
+      var end = moment();
+
+      end.set({
+        hour: currentPeriod.endTime.hour,
+        minute: currentPeriod.endTime.minute,
+        second: 0,
+      });
+      return end;
+    } else {
+      return true;
+    }
+  }
+
+  timeLeft() {
+    if(this.getPeriodTime() === true){
+      return "End";
+    }
+    var time = this.getPeriodTime();
+    var distance = time.valueOf() - moment().valueOf();
+    var hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    return "" + hours + ":" + minutes + ":" + seconds;
+  }
+
+  getPeriod(){
     for (var i = 0; i < scheduleFile.Schedule.schedule.length; i++) {
       var start = moment();
       var end = moment();
@@ -43,32 +77,36 @@ class TimeManager extends React.Component {
         start.valueOf() <= moment().valueOf() &&
         end.valueOf() >= moment().valueOf()
       ) {
-        return end;
+        return scheduleFile.Schedule.schedule[i];
       }
     }
     return true;
   }
 
-  timeLeft() {
-    if(this.getPeriod()){
-      return "End";
+  getPeriodType(){
+    var currentPeriod = this.getPeriod();
+
+    if(currentPeriod !== true){
+      console.log(currentPeriod.type);
+      if(currentPeriod.type === "class"){
+        return currentPeriod.periodName;
+      } else if (currentPeriod.type === "passing"){
+        return "Passing go to " + currentPeriod.to;
+      } else if (currentPeriod.type === "lunches"){
+        return "Lunch";
+      }
+    } else {
+      return "No Time Available";
     }
-    var time = this.getPeriod();
-    var distance = time.valueOf() - moment().valueOf();
-    var hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    return "" + hours + ":" + minutes + ":" + seconds;
   }
 
   render() {
     // console.log(this.getSchedule());
-    return (
-      <div> {this.timeLeft()} </div>
+    return [
+      <div key="key1">{this.getPeriodType()}</div>,
+      <div key="key2">{this.timeLeft()}</div>
       // <Countdown date = {this.getPeriod()} />
-    );
+    ];
   }
 }
 
