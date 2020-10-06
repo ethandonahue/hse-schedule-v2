@@ -7,7 +7,7 @@ import timezone from "moment-timezone";
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
 var today = "Tuesday - Red";
-var selectedLunch = "a";
+var selectedLunch = "b";
 var todaysSchedule;
 
 
@@ -38,10 +38,19 @@ class TimeManager extends React.Component {
 
   getLunchSchedule(){
     // console.log("a");
-    
+    var lunchSchedule;
+
     for (var i = 0; i < todaysSchedule.schedule.length; i++) {
+
       if(todaysSchedule.schedule[i].type == "lunches"){
-        for(var x = 0; x < todaysSchedule.schedule[i].A.length; x++){
+        if(selectedLunch === "a"){
+          lunchSchedule = todaysSchedule.schedule[i].A;
+        } else if (selectedLunch === "b"){
+          lunchSchedule = todaysSchedule.schedule[i].B;
+        } else if (selectedLunch === "c"){
+          lunchSchedule = todaysSchedule.schedule[i].C;
+        }
+        for(var x = 0; x < lunchSchedule.length; x++){
           // console.log(x);
           var start = moment();
           var end = moment();
@@ -49,20 +58,20 @@ class TimeManager extends React.Component {
           // console.log(todaysSchedule.schedule[i].A);
 
           start.set({
-            hour: todaysSchedule.schedule[i].A[x].startTime.hour,
-            minute: todaysSchedule.schedule[i].A[x].startTime.minute,
+            hour: lunchSchedule[x].startTime.hour,
+            minute: lunchSchedule[x].startTime.minute,
             second: 0,
           });
           end.set({
-            hour: todaysSchedule.schedule[i].A[x].endTime.hour,
-            minute: todaysSchedule.schedule[i].A[x].endTime.minute,
+            hour: lunchSchedule[x].endTime.hour,
+            minute: lunchSchedule[x].endTime.minute,
             second: 0,
           });
 
           // console.log(scheduleFile.Schedule.schedule[i].type + " " + scheduleFile.Schedule.schedule[i].startTime.hour + ":" + scheduleFile.Schedule.schedule[i].startTime.minute + " - " + scheduleFile.Schedule.schedule[i].endTime.hour + ":" + scheduleFile.Schedule.schedule[i].endTime.minute);
           if (start.valueOf() <= moment().valueOf() && end.valueOf() >= moment().valueOf()) {
           // console.log(todaysSchedule.schedule[i].A[x]);
-          return todaysSchedule.schedule[i].A[x];
+          return lunchSchedule[x];
           }
         }
 
