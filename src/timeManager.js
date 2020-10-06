@@ -7,7 +7,7 @@ import timezone from "moment-timezone";
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
 var today = "Tuesday - Red";
-var selectedLunch = "b";
+var selectedLunch = "c";
 var todaysSchedule;
 
 
