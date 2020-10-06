@@ -25,6 +25,8 @@ class TimeManager extends React.Component {
     this.getPeriod = this.getPeriod.bind(this);
     this.timeLeft = this.timeLeft.bind(this);
     this.findSchedule = this.findSchedule.bind(this);
+    this.getLunchSchedule = this.getLunchSchedule.bind(this);
+
   }
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000);
@@ -34,13 +36,49 @@ class TimeManager extends React.Component {
     this.setState({});
   }
 
+  getLunchSchedule(){
+    // console.log("a");
+    
+    for (var i = 0; i < todaysSchedule.schedule.length; i++) {
+      if(todaysSchedule.schedule[i].type == "lunches"){
+        for(var x = 0; x < todaysSchedule.schedule[i].A.length; x++){
+          // console.log(x);
+          var start = moment();
+          var end = moment();
+
+          // console.log(todaysSchedule.schedule[i].A);
+
+          start.set({
+            hour: todaysSchedule.schedule[i].A[x].startTime.hour,
+            minute: todaysSchedule.schedule[i].A[x].startTime.minute,
+            second: 0,
+          });
+          end.set({
+            hour: todaysSchedule.schedule[i].A[x].endTime.hour,
+            minute: todaysSchedule.schedule[i].A[x].endTime.minute,
+            second: 0,
+          });
+
+          // console.log(scheduleFile.Schedule.schedule[i].type + " " + scheduleFile.Schedule.schedule[i].startTime.hour + ":" + scheduleFile.Schedule.schedule[i].startTime.minute + " - " + scheduleFile.Schedule.schedule[i].endTime.hour + ":" + scheduleFile.Schedule.schedule[i].endTime.minute);
+          if (start.valueOf() <= moment().valueOf() && end.valueOf() >= moment().valueOf()) {
+          // console.log(todaysSchedule.schedule[i].A[x]);
+          return todaysSchedule.schedule[i].A[x];
+          }
+        }
+
+
+    }
+  }
+  }
+
   findSchedule(){
     for(var i = 0; i < scheduleFile.Schedule.length; i++){
       if(scheduleFile.Schedule[i].metadata.name === today){
         todaysSchedule = scheduleFile.Schedule[i];
       }
     }
-
+    //
+    // console.log(todaysSchedule);
   }
 
   getPeriodTime() {
@@ -70,7 +108,14 @@ class TimeManager extends React.Component {
     );
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if(seconds < 10){
+      seconds = "0" + seconds;
+    }
+    if(hours < 1){
+      return minutes + ":" + seconds;
+    } else {
     return "" + hours + ":" + minutes + ":" + seconds;
+  }
   }
 
   getPeriod(){
@@ -78,6 +123,8 @@ class TimeManager extends React.Component {
     for (var i = 0; i < todaysSchedule.schedule.length; i++) {
       var start = moment();
       var end = moment();
+
+
 
       start.set({
         hour: todaysSchedule.schedule[i].startTime.hour,
@@ -91,10 +138,11 @@ class TimeManager extends React.Component {
       });
 
       // console.log(scheduleFile.Schedule.schedule[i].type + " " + scheduleFile.Schedule.schedule[i].startTime.hour + ":" + scheduleFile.Schedule.schedule[i].startTime.minute + " - " + scheduleFile.Schedule.schedule[i].endTime.hour + ":" + scheduleFile.Schedule.schedule[i].endTime.minute);
-      if (
-        start.valueOf() <= moment().valueOf() &&
-        end.valueOf() >= moment().valueOf()
-      ) {
+      if (start.valueOf() <= moment().valueOf() && end.valueOf() >= moment().valueOf()) {
+        if(todaysSchedule.schedule[i].type === "lunches"){
+          return this.getLunchSchedule();
+        }
+
         return todaysSchedule.schedule[i];
       }
     }
@@ -109,7 +157,7 @@ class TimeManager extends React.Component {
         return currentPeriod.periodName;
       } else if (currentPeriod.type === "passing"){
         return "Passing go to " + currentPeriod.to;
-      } else if (currentPeriod.type === "lunches"){
+      } else if (currentPeriod.type === "lunches" || currentPeriod.type === "lunch"){
         return "Lunch";
       }
     } else {
@@ -120,8 +168,9 @@ class TimeManager extends React.Component {
   render() {
     // console.log(this.getSchedule());
     return [
-      <div key="key1">{this.getPeriodType()}</div>,
-      <div key="key2">{this.timeLeft()}</div>
+      <div key="key1">{moment().format("HH:mm:ss")}</div>,
+      <div key="key2">{this.getPeriodType()}</div>,
+      <div key="key3">{this.timeLeft()}</div>
       // <Countdown date = {this.getPeriod()} />
     ];
 }
