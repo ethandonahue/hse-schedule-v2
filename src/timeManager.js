@@ -6,10 +6,17 @@ import timezone from "moment-timezone";
 // moment.tz.setDefault("America/New_York");
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
+var today = "Tuesday - Red";
+var selectedLunch = "a";
+var todaysSchedule;
 
-console.log(scheduleFile);
+
+
+
+
 
 class TimeManager extends React.Component {
+
   constructor() {
     super();
     window.tm = this;
@@ -17,6 +24,7 @@ class TimeManager extends React.Component {
     this.getPeriodType = this.getPeriodType.bind(this);
     this.getPeriod = this.getPeriod.bind(this);
     this.timeLeft = this.timeLeft.bind(this);
+    this.findSchedule = this.findSchedule.bind(this);
   }
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000);
@@ -24,6 +32,15 @@ class TimeManager extends React.Component {
 
   tick() {
     this.setState({});
+  }
+
+  findSchedule(){
+    for(var i = 0; i < scheduleFile.Schedule.length; i++){
+      if(scheduleFile.Schedule[i].metadata.name === today){
+        todaysSchedule = scheduleFile.Schedule[i];
+      }
+    }
+
   }
 
   getPeriodTime() {
@@ -57,18 +74,19 @@ class TimeManager extends React.Component {
   }
 
   getPeriod(){
-    for (var i = 0; i < scheduleFile.Schedule.schedule.length; i++) {
+    this.findSchedule();
+    for (var i = 0; i < todaysSchedule.schedule.length; i++) {
       var start = moment();
       var end = moment();
 
       start.set({
-        hour: scheduleFile.Schedule.schedule[i].startTime.hour,
-        minute: scheduleFile.Schedule.schedule[i].startTime.minute,
+        hour: todaysSchedule.schedule[i].startTime.hour,
+        minute: todaysSchedule.schedule[i].startTime.minute,
         second: 0,
       });
       end.set({
-        hour: scheduleFile.Schedule.schedule[i].endTime.hour,
-        minute: scheduleFile.Schedule.schedule[i].endTime.minute,
+        hour: todaysSchedule.schedule[i].endTime.hour,
+        minute: todaysSchedule.schedule[i].endTime.minute,
         second: 0,
       });
 
@@ -77,7 +95,7 @@ class TimeManager extends React.Component {
         start.valueOf() <= moment().valueOf() &&
         end.valueOf() >= moment().valueOf()
       ) {
-        return scheduleFile.Schedule.schedule[i];
+        return todaysSchedule.schedule[i];
       }
     }
     return true;
@@ -87,7 +105,6 @@ class TimeManager extends React.Component {
     var currentPeriod = this.getPeriod();
 
     if(currentPeriod !== true){
-      console.log(currentPeriod.type);
       if(currentPeriod.type === "class"){
         return currentPeriod.periodName;
       } else if (currentPeriod.type === "passing"){
@@ -107,7 +124,7 @@ class TimeManager extends React.Component {
       <div key="key2">{this.timeLeft()}</div>
       // <Countdown date = {this.getPeriod()} />
     ];
-  }
+}
 }
 
 export default TimeManager;
