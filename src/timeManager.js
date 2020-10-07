@@ -6,8 +6,8 @@ import timezone from "moment-timezone";
 // moment.tz.setDefault("America/New_York");
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
-var today = "Tuesday - Red";
-var selectedLunch = "c";
+var today = "Wednesday - Red";
+var selectedLunch = "a";
 var todaysSchedule;
 
 
