@@ -6,8 +6,10 @@
   height: 100vh;
 }
 
-.timerContainer{
-
+.dropdown{
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 10px;
 }
 
 .App-logo {
@@ -34,6 +36,10 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.myControlClassName{
+  background-color: blue !important;
 }
 
 @keyframes App-logo-spin {

@@ -12,9 +12,6 @@ var todaysSchedule;
 
 
 
-
-
-
 class TimeManager extends React.Component {
 
   constructor() {
@@ -26,8 +23,16 @@ class TimeManager extends React.Component {
     this.timeLeft = this.timeLeft.bind(this);
     this.findSchedule = this.findSchedule.bind(this);
     this.getLunchSchedule = this.getLunchSchedule.bind(this);
-
+    this.setLunch = this.setLunch.bind(this);
   }
+
+
+setLunch(e){
+
+   selectedLunch = e.value.toLowerCase();
+}
+
+
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000);
   }
@@ -49,6 +54,8 @@ class TimeManager extends React.Component {
           lunchSchedule = todaysSchedule.schedule[i].B;
         } else if (selectedLunch === "c"){
           lunchSchedule = todaysSchedule.schedule[i].C;
+        } else {
+          lunchSchedule = todaysSchedule.schedule[i];
         }
         for(var x = 0; x < lunchSchedule.length; x++){
           // console.log(x);
@@ -184,5 +191,6 @@ class TimeManager extends React.Component {
     ];
 }
 }
+
 
 export default TimeManager;
