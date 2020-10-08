@@ -6,11 +6,49 @@ import timezone from "moment-timezone";
 // moment.tz.setDefault("America/New_York");
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
-var today = "Wednesday - Red";
+var today;
 var selectedLunch = "a";
 var todaysSchedule;
 
+var scheduleDays = {
+	1:"Thursday - Blue",
+	2:"Friday - Blue",
+	3:"Weekend",
+	4:"Weekend",
+	5:"Monday - Red",
+	6:"Tuesday - Red",
+	7:"Wednesday - Red",
+	8:"Thursday - Blue",
+	9:"Friday - Blue",
+	10:"Weekend",
+	11:"Weekend",
+	12:"Monday - Red",
+  13:"Tuesday - Red",
+	14:"Wednesday - Blue",
+	15:"Thursday - Blue",
+	16:"Friday - Blue",
+	17:"Weekend",
+	18:"Weekend",
+	19:"Weekend",
+	20:"Weekend",
+	21:"Weekend",
+	22:"Weekend",
+	23:"Weekend",
+	24:"Weekend",
+	25:"Weekend",
+	26:"Monday - Red",
+	27:"Tuesday - Red",
+	28:"Wednesday - Red",
+	29:"Thursday - Blue",
+	30:"Friday - Blue",
+	31:"Weekend",
+};
 
+
+console.log(moment().date());
+console.log(scheduleDays[1]);
+
+today = scheduleDays[moment().date()];
 
 class TimeManager extends React.Component {
 
