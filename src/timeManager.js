@@ -7,7 +7,7 @@ import timezone from "moment-timezone";
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
 var today;
-var selectedLunch = "a";
+var selectedLunch = "";
 var todaysSchedule;
 
 var scheduleDays = {
@@ -80,12 +80,13 @@ setLunch(e){
   }
 
   getLunchSchedule(){
-    // console.log("a");
+
     var lunchSchedule;
 
     for (var i = 0; i < todaysSchedule.schedule.length; i++) {
 
       if(todaysSchedule.schedule[i].type == "lunches"){
+
         if(selectedLunch === "a"){
           lunchSchedule = todaysSchedule.schedule[i].A;
         } else if (selectedLunch === "b"){
@@ -93,7 +94,9 @@ setLunch(e){
         } else if (selectedLunch === "c"){
           lunchSchedule = todaysSchedule.schedule[i].C;
         } else {
+
           lunchSchedule = todaysSchedule.schedule[i];
+					return lunchSchedule;
         }
         for(var x = 0; x < lunchSchedule.length; x++){
           // console.log(x);
@@ -113,9 +116,12 @@ setLunch(e){
             second: 0,
           });
 
+
+
           // console.log(scheduleFile.Schedule.schedule[i].type + " " + scheduleFile.Schedule.schedule[i].startTime.hour + ":" + scheduleFile.Schedule.schedule[i].startTime.minute + " - " + scheduleFile.Schedule.schedule[i].endTime.hour + ":" + scheduleFile.Schedule.schedule[i].endTime.minute);
           if (start.valueOf() <= moment().valueOf() && end.valueOf() >= moment().valueOf()) {
           // console.log(todaysSchedule.schedule[i].A[x]);
+
           return lunchSchedule[x];
           }
         }
@@ -211,9 +217,11 @@ setLunch(e){
         return currentPeriod.periodName;
       } else if (currentPeriod.type === "passing"){
         return "Passing go to " + currentPeriod.to;
-      } else if (currentPeriod.type === "lunches" || currentPeriod.type === "lunch"){
+      } else if (currentPeriod.type === "lunch"){
         return "Lunch";
-      }
+      } else {
+				return currentPeriod.periodName;
+			}
     } else {
       return "No Time Available";
     }
