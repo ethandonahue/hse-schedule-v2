@@ -26,3 +26,9 @@
 .App{
   -webkit-margin-before: 0em;
 }
+
+.cal{
+display: flex;
+align-content: center;
+justify-content: center;
+}

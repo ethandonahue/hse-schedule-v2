@@ -44,9 +44,35 @@ var scheduleDays = {
 	31:"Weekend",
 };
 
+// 
+// setTimeout(splash(), 3000);
+//
+//
+//
+// function splash(){
+// var day = document.getElementsByClassName("timeContent");
+// console.log(typeof(day));
+// day.style.backgroundColor = "blue";
+// }
+//
+// console.log(Object.keys(scheduleDays).length);
+//
+// for(var i = 1; i <= Object.keys(scheduleDays).length; i++){
+// 	// console.log(scheduleAtDay(scheduleDays[i]).metadata.dayColor);
+//
+// }
 
-console.log(moment().date());
-console.log(scheduleDays[1]);
+function scheduleAtDay(today){
+	for(var i = 0; i < scheduleFile.Schedule.length; i++){
+		if(scheduleFile.Schedule[i].metadata.name === today){
+			return scheduleFile.Schedule[i];
+		}
+	}
+	//
+	// console.log(todaysSchedule);
+}
+
+
 
 today = scheduleDays[moment().date()];
 
@@ -63,6 +89,9 @@ class TimeManager extends React.Component {
     this.getLunchSchedule = this.getLunchSchedule.bind(this);
     this.setLunch = this.setLunch.bind(this);
   }
+
+
+
 
 
 setLunch(e){
@@ -180,6 +209,7 @@ setLunch(e){
 
   getPeriod(){
     this.findSchedule();
+		if(todaysSchedule.type !== "weekend"){
     for (var i = 0; i < todaysSchedule.schedule.length; i++) {
       var start = moment();
       var end = moment();
@@ -206,13 +236,14 @@ setLunch(e){
         return todaysSchedule.schedule[i];
       }
     }
-    return true;
+	}
+    return "end";
   }
 
   getPeriodType(){
     var currentPeriod = this.getPeriod();
 
-    if(currentPeriod !== true){
+    if(currentPeriod !== "end"){
       if(currentPeriod.type === "class"){
         return currentPeriod.periodName;
       } else if (currentPeriod.type === "passing"){
