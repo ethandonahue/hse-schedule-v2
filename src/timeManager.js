@@ -1,5 +1,5 @@
 import React from "react";
-import Schedule from "./schedules.json";
+import Schedule from "./schedules/schedules.json";
 import moment from "moment";
 import timezone from "moment-timezone";
 
