@@ -43,34 +43,7 @@ var scheduleDays = {
 	30:"Monday - Red",
 };
 
-// 
-// setTimeout(splash(), 3000);
-//
-//
-//
-// function splash(){
-// var day = document.getElementsByClassName("timeContent");
-// console.log(typeof(day));
-// day.style.backgroundColor = "blue";
-// }
-//
-// console.log(Object.keys(scheduleDays).length);
-//
 
-
-// splash(){
-  
-//   var day = document.getElementsByClassName("timeContent");
-//   console.log(day);
-//   day[0].style.backgroundColor = "blue";
-  
-//     }
-  
-
-// for(var i = 1; i <= Object.keys(scheduleDays).length; i++){
-// 	// console.log(scheduleAtDay(scheduleDays[i]).metadata.dayColor);
-
-// }
 
 
 function scheduleAtDay(today){
