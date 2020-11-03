@@ -3,7 +3,7 @@ import Schedule from "./schedules/schedules.json";
 import moment from "moment";
 import timezone from "moment-timezone";
 
-// moment.tz.setDefault("America/New_York");
+moment.tz.setDefault("America/New_York");
 
 var scheduleFile = JSON.parse(JSON.stringify({ Schedule }));
 var today;
@@ -52,8 +52,6 @@ function scheduleAtDay(today){
 			return scheduleFile.Schedule[i];
 		}
 	}
-	//
-	// console.log(todaysSchedule);
 }
 
 
@@ -197,6 +195,9 @@ setLunch(e){
     if(seconds < 10){
       seconds = "0" + seconds;
     }
+    if(minutes < 10){
+      minutes = "0" + minutes;
+    }
     if(hours < 1){
       return minutes + ":" + seconds;
     } else {
@@ -258,7 +259,8 @@ setLunch(e){
   render() {
     // console.log(this.getSchedule());
     return [
-      <div key="key1">{moment().format("HH:mm:ss")}</div>,
+      <div key="key0">{moment().format("dddd, MMMM Do YYYY")}</div>,
+      <div key="key1">{moment().format("hh:mm:ss a")}</div>,
       <div key="key2">{this.getPeriodType()}</div>,
       <div key="key3">{this.timeLeft()}</div>
       // <Countdown date = {this.getPeriod()} />
