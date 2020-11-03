@@ -4,6 +4,7 @@ import Timer from "./timeManager.js";
 import Dropdown from "./dropdown.js";
 import Header from "./header.js";
 import Calendar from "./calendar.js";
+import List from "./scheduleList.js";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <Dropdown />
     </div>
     <Calendar />
+    <List />
     </div>
   );
 }

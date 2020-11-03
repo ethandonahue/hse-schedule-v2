@@ -161,6 +161,7 @@ setLunch(e){
         todaysSchedule = scheduleFile.Schedule[i];
       }
     }
+    return todaysSchedule;
     //
     // console.log(todaysSchedule);
   }
