@@ -11,37 +11,36 @@ var selectedLunch = "";
 var todaysSchedule;
 
 var scheduleDays = {
-	1:"Thursday - Blue",
-	2:"Friday - Blue",
-	3:"Weekend",
-	4:"Weekend",
-	5:"Monday - Red",
-	6:"Tuesday - Red",
-	7:"Wednesday - Red",
-	8:"Thursday - Blue",
-	9:"Friday - Blue",
-	10:"Weekend",
-	11:"Weekend",
-	12:"Monday - Red",
-  13:"Tuesday - Red",
-	14:"Wednesday - Blue",
-	15:"Thursday - Blue",
-	16:"Friday - Blue",
-	17:"Weekend",
-	18:"Weekend",
-	19:"Weekend",
-	20:"Weekend",
+	1:"Weekend",
+	2:"Monday - Red",
+	3:"Tuesday - Red",
+	4:"Wednesday - Blue",
+	5:"Thursday - Blue",
+	6:"Friday - Blue",
+	7:"Weekend",
+  8:"Weekend",
+  9:"Monday - Red",
+	10:"Tuesday - Red",
+	11:"Wednesday - Red",
+	12:"Thursday - Blue",
+	13:"Friday - Blue",
+	14:"Weekend",
+  15:"Weekend",
+  16:"Monday - Red",
+	17:"Tuesday - Red",
+	18:"Wednesday - Blue",
+	19:"Thursday - Blue",
+	20:"Friday - Blue",
 	21:"Weekend",
 	22:"Weekend",
-	23:"Weekend",
-	24:"Weekend",
+	23:"Monday - Red",
+  24:"Tuesday - Red",
 	25:"Weekend",
-	26:"Monday - Red",
-	27:"Tuesday - Red",
-	28:"Wednesday - Red",
-	29:"Thursday - Blue",
-	30:"Friday - Blue",
-	31:"Weekend",
+  26:"Weekend",
+  27:"Weekend",
+  28:"Weekend",
+  29:"Weekend",
+	30:"Monday - Red",
 };
 
 // 
@@ -57,10 +56,22 @@ var scheduleDays = {
 //
 // console.log(Object.keys(scheduleDays).length);
 //
+
+
+// splash(){
+  
+//   var day = document.getElementsByClassName("timeContent");
+//   console.log(day);
+//   day[0].style.backgroundColor = "blue";
+  
+//     }
+  
+
 // for(var i = 1; i <= Object.keys(scheduleDays).length; i++){
 // 	// console.log(scheduleAtDay(scheduleDays[i]).metadata.dayColor);
-//
+
 // }
+
 
 function scheduleAtDay(today){
 	for(var i = 0; i < scheduleFile.Schedule.length; i++){
@@ -88,11 +99,23 @@ class TimeManager extends React.Component {
     this.findSchedule = this.findSchedule.bind(this);
     this.getLunchSchedule = this.getLunchSchedule.bind(this);
     this.setLunch = this.setLunch.bind(this);
+    this.setCalendarColor = this.setCalendarColor.bind(this);
   }
 
 
+setCalendarColor(){
+  for(var i = 1; i <= Object.keys(scheduleDays).length; i++){
+    var color = "#D3D3D3";
+    if(scheduleAtDay(scheduleDays[i]).metadata.dayColor == "blue"){
+      color = "#add8e6";
+    } else if (scheduleAtDay(scheduleDays[i]).metadata.dayColor == "red"){
+      color = "#ffcccb";
+    }
+    var day = document.getElementsByClassName("day" + i);
+    day[0].style.backgroundColor = color;
+}
 
-
+}
 
 setLunch(e){
 
@@ -102,6 +125,7 @@ setLunch(e){
 
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000);
+    this.setCalendarColor();
   }
 
   tick() {
