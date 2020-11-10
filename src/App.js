@@ -5,17 +5,29 @@ import Dropdown from "./dropdown.js";
 import Header from "./header.js";
 import Calendar from "./calendar.js";
 import List from "./scheduleList.js";
+import ButtonBar from "./buttonBar.js";
 
 function App() {
   return (
     <div className="App">
-    <Header />
-    <div className="timeContent">
+      <Header />
+      <div className="mainContent">
+    
+    <div className="timeContent timePage">
     <Timer />
     <Dropdown />
     </div>
+    <div className="calPage">
     <Calendar />
-    <List />
+    </div>
+   <div className="listPage">
+   <List />
+   </div>
+   
+    </div>
+    <div className="buttonBar">
+    <ButtonBar />
+    </div>
     </div>
   );
 }

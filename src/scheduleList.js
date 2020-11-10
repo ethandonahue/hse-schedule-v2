@@ -73,7 +73,7 @@ class ScheduleList extends Component {
            
         }
         console.log(scheduleArr);
-        return scheduleArr.map((per) => <div class="schedList">{per}</div>);
+        return scheduleArr.map((per) => <div className="schedList">{per}</div>);
         
     }
 
