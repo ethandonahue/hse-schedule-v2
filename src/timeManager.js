@@ -11,36 +11,37 @@ var selectedLunch = "";
 var todaysSchedule;
 
 var scheduleDays = {
-	1:"Weekend",
-	2:"Monday - Red",
-	3:"Tuesday - Red",
-	4:"Wednesday - Blue",
-	5:"Thursday - Blue",
-	6:"Friday - Blue",
-	7:"Weekend",
-  8:"Weekend",
-  9:"Monday - Red",
-	10:"Tuesday - Red",
-	11:"Wednesday - Red",
-	12:"Thursday - Blue",
-	13:"Friday - Blue",
-	14:"Weekend",
-  15:"Weekend",
-  16:"Monday - Red",
-	17:"Tuesday - Red",
-	18:"Wednesday - Blue",
-	19:"Thursday - Blue",
-	20:"Friday - Blue",
-	21:"Weekend",
-	22:"Weekend",
-	23:"Monday - Red",
-  24:"Tuesday - Red",
-	25:"Weekend",
+	1:"Tuesday - Red",
+	2:"Wednesday - Blue",
+	3:"Thursday - Blue",
+	4:"Friday - Blue",
+	5:"Weekend",
+  6:"Weekend",
+  7:"Monday - Red",
+	8:"Tuesday - Red",
+	9:"Wednesday - Red",
+	10:"Thursday - Blue",
+	11:"Friday - Blue",
+	12:"Weekend",
+  13:"Weekend",
+  14:"Monday - Red",
+	15:"Tuesday - Red",
+	16:"Wednesday - Blue",
+	17:"Thursday - Blue",
+	18:"Friday - Blue",
+	19:"Weekend",
+	20:"Weekend",
+	21:"Monday - Red",
+  22:"Tuesday - Red",
+	23:"Weekend",
+  24:"Weekend",
+  25:"Weekend",
   26:"Weekend",
   27:"Weekend",
-  28:"Weekend",
-  29:"Weekend",
-	30:"Monday - Red",
+  28:"Monday - Red",
+  29:"Monday - Red",
+  30:"Monday - Red",
+  31:"Monday - Red"
 };
 
 
@@ -167,8 +168,13 @@ setLunch(e){
   }
 
   getPeriodTime() {
-    var currentPeriod = this.getPeriod();
-    if(currentPeriod !== true){
+    var currentPeriod;
+    if(this.getPeriod() !== "end"){
+    currentPeriod = this.getPeriod();
+    } else {
+    currentPeriod = false;
+    }
+    if(currentPeriod !== true && currentPeriod !== false){
       var end = moment();
 
       end.set({
@@ -207,8 +213,10 @@ setLunch(e){
   }
 
   getPeriod(){
+    // todaysSchedule.type !== "weekend" || 
     this.findSchedule();
-		if(todaysSchedule.type !== "weekend"){
+    console.log(todaysSchedule.length);
+		if(todaysSchedule.length !== undefined){
     for (var i = 0; i < todaysSchedule.schedule.length; i++) {
       var start = moment();
       var end = moment();

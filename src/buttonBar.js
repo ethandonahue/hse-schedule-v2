@@ -1,5 +1,8 @@
 import React from "react";
 import { Component } from "react";
+import listImg from "./pictures/list.png";
+import mainImg from "./pictures/clock.png";
+import calImg from "./pictures/calendar.png";
 
 
 
@@ -36,13 +39,19 @@ class ButtonBar extends Component {
 
 render(){
 
+let style = {
+  width:"3%",
+  height:"50%",
+};
  
 
     return[
-        
-        <button onClick={() => this.hidePage(0)}>Bell</button>,
-    <button onClick={() => this.hidePage(1)}>Main</button>,
-    <button onClick={() => this.hidePage(2)}>Calendar</button>
+      
+      <img style={style} src={listImg} onClick={() => this.hidePage(0)} />,
+      <img style={style} src={mainImg} onClick={() => this.hidePage(1)} />,
+      <img style={style} src={calImg} onClick={() => this.hidePage(2)} />,
+
+    
     ];
 }
 
