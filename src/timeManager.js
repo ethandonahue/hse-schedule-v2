@@ -215,8 +215,8 @@ setLunch(e){
   getPeriod(){
     // todaysSchedule.type !== "weekend" || 
     this.findSchedule();
-    console.log(todaysSchedule.length);
-		if(todaysSchedule.length !== undefined){
+ 
+		if(todaysSchedule.schedule.length !== undefined){
     for (var i = 0; i < todaysSchedule.schedule.length; i++) {
       var start = moment();
       var end = moment();

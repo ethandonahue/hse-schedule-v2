@@ -18,9 +18,9 @@ class ScheduleList extends Component {
         var scheduleArr = [];
         var s = window.tm.findSchedule();
         console.log(s);
-        if(s.length !== undefined){
+        if(s.schedule.length !== undefined){
         for(var i = 0; i < s.schedule.length; i++){
-            
+            if(s.schedule[i].period !== undefined){
                 var p = s.schedule[i];
                 var startH = (p.startTime.hour > 12) ? p.startTime.hour-12 : p.startTime.hour;
                 var startM = (p.startTime.minute < 10) ? "0" + p.startTime.minute : p.startTime.minute;
@@ -71,6 +71,7 @@ class ScheduleList extends Component {
 
                 }
             }
+        }
            
         } else {
             scheduleArr.push("Weekend");
