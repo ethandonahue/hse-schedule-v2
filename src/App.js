@@ -25,8 +25,10 @@ function App() {
    </div>
    
     </div>
+    <div className="buttonBarContainer">
     <div className="buttonBar">
     <ButtonBar />
+    </div>
     </div>
     </div>
   );

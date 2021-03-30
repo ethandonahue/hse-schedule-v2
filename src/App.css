@@ -16,11 +16,12 @@
   display: flex;
   flex-direction: column;
   height: 10vh;
-  justify-content: center;
-  align-items: center;
-  background-color: grey;
+  /* justify-content: space-around; */
+  align-items: left;
+  background-color: #F5F5F5;
   box-shadow: 3px 3px 3px #ccc;
-  color: white;
+  color: black;
+  padding-left: 30px;
 }
 
 .App{
@@ -34,27 +35,36 @@ justify-content: center;
 }
 
 .schedList{
+  display: flex;
+  align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
-  text-align: center;
+  font-size: 2vh;
+  height: 5vh;
+  background-color: #F5F5F5;
+  padding-left: 10%;
+  
 }
 
 .listPage, .calPage{
   display: none;
+  width: 20vw;
 }
 
+
+
 .buttonBar{
-  position: fixed;
+  border-radius: 25px;
   display: flex;
-  width: 100%;
-  height: 10vh;
+  width: 50%;
+  height: 100%;
   align-items: center;
-  justify-content: space-evenly;
-  background-color: lightblue;
+  justify-content: space-around;
+  background-color: #F5F5F5;
 }
 
 .mainContent{
-  height: 80vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,3 +72,11 @@ justify-content: center;
 }
 
 
+.buttonBarContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 10vh;
+
+}

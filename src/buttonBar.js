@@ -40,7 +40,7 @@ class ButtonBar extends Component {
 render(){
 
 let style = {
-  width:"3%",
+  width:"5%",
   height:"50%",
 };
  

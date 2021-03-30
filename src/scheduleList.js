@@ -27,7 +27,7 @@ class ScheduleList extends Component {
                 var endH = (p.endTime.hour > 12) ? p.endTime.hour-12 : p.endTime.hour;
                 var endM = (p.endTime.minute < 10) ? "0" + p.endTime.minute : p.endTime.minute;
  
-                scheduleArr.push(p.period + " - " + startH + ":" + startM + " to " + endH + ":" + endM);
+                scheduleArr.push("Period " + p.period + " - " + startH + ":" + startM + " to " + endH + ":" + endM);
                 console.log(p.period + " - " + startH + ":" + startM + " to " + endH + ":" + endM);
                 if(p.type == "lunches"){
                     for(var a = 0; a < p.A.length; a++){
@@ -39,7 +39,7 @@ class ScheduleList extends Component {
                         }
                         
                     }
-                    scheduleArr.push("A" + " - " + startHA + ":" + startMA + " to " + endHA + ":" + endMA);
+                    scheduleArr.push("A Lunch" + " - " + startHA + ":" + startMA + " to " + endHA + ":" + endMA);
 
                     for(var b = 0; b < p.B.length; b++){
                         if (p.B[b].type == "lunch"){
@@ -51,7 +51,7 @@ class ScheduleList extends Component {
                         
                     }
 
-                    scheduleArr.push("B" + " - " + startHB + ":" + startMB + " to " + endHB + ":" + endMB);
+                    scheduleArr.push("B Lunch" + " - " + startHB + ":" + startMB + " to " + endHB + ":" + endMB);
 
 
                     for(var c = 0; c < p.C.length; c++){
@@ -64,7 +64,7 @@ class ScheduleList extends Component {
                         
                     }
 
-                    scheduleArr.push("C" + " - " + startHC + ":" + startMC + " to " + endHC + ":" + endMC);
+                    scheduleArr.push("C Lunch" + " - " + startHC + ":" + startMC + " to " + endHC + ":" + endMC);
 
 
                     
