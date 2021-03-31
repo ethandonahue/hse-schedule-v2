@@ -4,7 +4,7 @@ import 'react-dropdown/style.css';
 import Tm from "./timeManager.js";
 
 const options = [
-  'A', 'B', 'C', 'None'
+  'A Lunch', 'B Lunch', 'C Lunch', 'None'
 ];
 const defaultOption = options[0];
 

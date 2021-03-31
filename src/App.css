@@ -2,8 +2,8 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
- 
+  justify-content: space-between;
+ height: 50vh;
 }
 
 .dropdown{
@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   height: 10vh;
-  /* justify-content: space-around; */
+  justify-content: space-around;
   align-items: left;
   background-color: #F5F5F5;
   box-shadow: 3px 3px 3px #ccc;
@@ -28,10 +28,12 @@
   -webkit-margin-before: 0em;
 }
 
+
 .cal{
 display: flex;
 align-content: center;
 justify-content: center;
+
 }
 
 .schedList{
@@ -40,11 +42,12 @@ justify-content: center;
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 2vh;
-  height: 5vh;
+  height: 8vh;
   background-color: #F5F5F5;
   padding-left: 10%;
   
 }
+
 
 .listPage, .calPage{
   display: none;
@@ -79,4 +82,23 @@ justify-content: center;
   width: 100vw;
   height: 10vh;
 
+}
+
+.date{
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.time{
+  font-size: 30px;
+}
+
+.period{
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.timeLeft{
+  font-weight: bolder;
+  font-size: 40px;
 }

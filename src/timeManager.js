@@ -11,7 +11,7 @@ var selectedLunch = "";
 var todaysSchedule;
 
 var scheduleDays = {
-	1:"Tuesday - Red",
+	1:"Thursday - Blue",
 	2:"Wednesday - Blue",
 	3:"Thursday - Blue",
 	4:"Friday - Blue",
@@ -72,6 +72,7 @@ class TimeManager extends React.Component {
     this.getLunchSchedule = this.getLunchSchedule.bind(this);
     this.setLunch = this.setLunch.bind(this);
     this.setCalendarColor = this.setCalendarColor.bind(this);
+    this.setCalendarColor = this.rawTimeLeft.bind(this);
   }
 
 
@@ -84,14 +85,15 @@ setCalendarColor(){
       color = "#ffcccb";
     }
     var day = document.getElementsByClassName("day" + i);
-    day[0].style.backgroundColor = color;
+    // day[0].style.backgroundColor = color;
 }
 
 }
 
 setLunch(e){
 
-   selectedLunch = e.value.toLowerCase();
+   selectedLunch = e.value.charAt(0).toLowerCase();
+   console.log(e.value.charAt(0).toLowerCase());
 }
 
 
@@ -190,7 +192,7 @@ setLunch(e){
 
   timeLeft() {
     if(this.getPeriodTime() === true){
-      return "End";
+      return "School Day Over";
     }
     var time = this.getPeriodTime();
     var distance = time.valueOf() - moment().valueOf();
@@ -211,6 +213,58 @@ setLunch(e){
     return "" + hours + ":" + minutes + ":" + seconds;
   }
   }
+
+  rawTimeLeft() {
+    if(this.getPeriodTime() === true){
+      return null;
+    }
+
+    var start = moment();
+      var end = moment();
+
+
+
+      start.set({
+        hour: this.getPeriod().startTime.hour,
+        minute: this.getPeriod().startTime.minute,
+        second: 0,
+      });
+      end.set({
+        hour: this.getPeriod().endTime.hour,
+        minute: this.getPeriod().endTime.minute,
+        second: 0,
+      });
+
+    var totalTime = end.valueOf() - start.valueOf();
+    var time = this.getPeriodTime();
+    var distance = time.valueOf() - moment().valueOf();
+    return ((1 - distance/totalTime) * 100);
+    // var percent = totalTime / 
+
+
+
+
+    // var start = moment();
+    // var end = moment();
+
+
+
+    // start.set({
+    //   hour: todaysSchedule.schedule[i].startTime.hour,
+    //   minute: todaysSchedule.schedule[i].startTime.minute,
+    //   second: 0,
+    // });
+    // end.set({
+    //   hour: todaysSchedule.schedule[i].endTime.hour,
+    //   minute: todaysSchedule.schedule[i].endTime.minute,
+    //   second: 0,
+    // });
+
+    // var totalTime = end.valueOf() - start.valueOf();
+    // var distance = time.valueOf() - moment().valueOf();
+    //  return distance;
+  }
+  
 
   getPeriod(){
     // todaysSchedule.type !== "weekend" || 
@@ -261,17 +315,17 @@ setLunch(e){
 				return currentPeriod.periodName;
 			}
     } else {
-      return "No Time Available";
+      return "";
     }
   }
 
   render() {
     // console.log(this.getSchedule());
     return [
-      <div key="key0">{moment().format("dddd, MMMM Do YYYY")}</div>,
-      <div key="key1">{moment().format("hh:mm:ss a")}</div>,
-      <div key="key2">{this.getPeriodType()}</div>,
-      <div key="key3">{this.timeLeft()}</div>
+      <div className="date" key="key0">{moment().format("dddd, MMMM Do YYYY")}</div>,
+      <div className="time" key="key1">{moment().format("hh:mm:ss a")}</div>,
+      <div className="period" key="key2">{this.getPeriodType()}</div>,
+      <div className="timeLeft" key="key3">{this.timeLeft()}</div>
       // <Countdown date = {this.getPeriod()} />
     ];
 }

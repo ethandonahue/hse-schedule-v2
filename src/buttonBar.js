@@ -27,7 +27,7 @@ class ButtonBar extends Component {
             calPage.style.display = "none";
           } else if (page == 1){
             listPage.style.display = "none";
-            timePage.style.display = "block";
+            timePage.style.display = "flex";
             calPage.style.display = "none";
           } else if (page == 2){
             listPage.style.display = "none";

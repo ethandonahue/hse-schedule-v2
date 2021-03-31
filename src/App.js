@@ -6,16 +6,23 @@ import Header from "./header.js";
 import Calendar from "./calendar.js";
 import List from "./scheduleList.js";
 import ButtonBar from "./buttonBar.js";
+import Bar from "./progressBar.js";
+import { ProgressBar } from 'react-bootstrap';
+
 
 function App() {
   return (
     <div className="App">
+      
       <Header />
       <div className="mainContent">
-    
+     
     <div className="timeContent timePage">
     <Timer />
+    <Bar />
     <Dropdown />
+    
+    
     </div>
     <div className="calPage">
     <Calendar />
@@ -30,6 +37,7 @@ function App() {
     <ButtonBar />
     </div>
     </div>
+    
     </div>
   );
 }
