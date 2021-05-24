@@ -2,6 +2,7 @@ import React from "react";
 import Schedule from "./schedules/schedules.json";
 import moment from "moment";
 import timezone from "moment-timezone";
+import ScheduleList from "./scheduleList";
 
 moment.tz.setDefault("America/New_York");
 
@@ -11,7 +12,7 @@ var selectedLunch = "";
 var todaysSchedule;
 
 var scheduleDays = {
-	1:"Thursday - Blue",
+	1:"Friday - Blue",
 	2:"Wednesday - Blue",
 	3:"Thursday - Blue",
 	4:"Friday - Blue",
@@ -47,13 +48,6 @@ var scheduleDays = {
 
 
 
-function scheduleAtDay(today){
-	for(var i = 0; i < scheduleFile.Schedule.length; i++){
-		if(scheduleFile.Schedule[i].metadata.name === today){
-			return scheduleFile.Schedule[i];
-		}
-	}
-}
 
 
 
@@ -72,22 +66,35 @@ class TimeManager extends React.Component {
     this.getLunchSchedule = this.getLunchSchedule.bind(this);
     this.setLunch = this.setLunch.bind(this);
     this.setCalendarColor = this.setCalendarColor.bind(this);
-    this.setCalendarColor = this.rawTimeLeft.bind(this);
+    this.rawTimeLeft = this.rawTimeLeft.bind(this);
+    this.getSchedules = this.getSchedules.bind(this);
+    this.scheduleAtDay = this.scheduleAtDay.bind(this);
   }
 
-
+  scheduleAtDay(today){
+    for(var i = 0; i < scheduleFile.Schedule.length; i++){
+      if(scheduleFile.Schedule[i].metadata.name === today){
+        return scheduleFile.Schedule[i];
+      }
+    }
+  }
+  
 setCalendarColor(){
   for(var i = 1; i <= Object.keys(scheduleDays).length; i++){
     var color = "#D3D3D3";
-    if(scheduleAtDay(scheduleDays[i]).metadata.dayColor == "blue"){
+    if(this.scheduleAtDay(scheduleDays[i]).metadata.dayColor == "blue"){
       color = "#add8e6";
-    } else if (scheduleAtDay(scheduleDays[i]).metadata.dayColor == "red"){
+    } else if (this.scheduleAtDay(scheduleDays[i]).metadata.dayColor == "red"){
       color = "#ffcccb";
     }
     var day = document.getElementsByClassName("day" + i);
     // day[0].style.backgroundColor = color;
 }
 
+}
+
+getSchedules(){
+  return scheduleDays;
 }
 
 setLunch(e){

@@ -14,11 +14,18 @@ class ScheduleList extends Component {
     //       this.generateList();
     //   }
 
-    generateList(){
+    generateList(sched){
         var scheduleArr = [];
-        var s = window.tm.findSchedule();
+        console.log(sched);
+        var s;
+        if(sched == null){
+            s = window.tm.findSchedule();
+        } else {
+            s = sched;
+        }
+     
         console.log(s);
-        if(s.schedule.length !== undefined){
+        if(s.schedule !== undefined){
         for(var i = 0; i < s.schedule.length; i++){
             if(s.schedule[i].period !== undefined){
                 var p = s.schedule[i];
@@ -27,7 +34,7 @@ class ScheduleList extends Component {
                 var endH = (p.endTime.hour > 12) ? p.endTime.hour-12 : p.endTime.hour;
                 var endM = (p.endTime.minute < 10) ? "0" + p.endTime.minute : p.endTime.minute;
  
-                scheduleArr.push("Period " + p.period + " - " + startH + ":" + startM + " to " + endH + ":" + endM);
+                scheduleArr.push(p.period + " - " + startH + ":" + startM + " to " + endH + ":" + endM);
                 console.log(p.period + " - " + startH + ":" + startM + " to " + endH + ":" + endM);
                 if(p.type == "lunches"){
                     for(var a = 0; a < p.A.length; a++){
@@ -84,7 +91,7 @@ class ScheduleList extends Component {
 
     render() {
         return(
-            this.generateList()
+            this.generateList(null)
         );
     }
 }
